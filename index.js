@@ -3,7 +3,7 @@ const app = express();
 require('dotenv').config()
 const cors = require("cors")
 const { MongoClient } = require('mongodb');
-const e = require("express");
+const { initializeApp } = require('firebase-admin/app');
 const port = process.env.PORT || 5000;
 
 // middleWare
@@ -15,6 +15,14 @@ app.use(express.json())
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.0th5g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+async function verifyToken(req,res,next){
+    if(req.headers.authorization.startWith("bearer ")){
+        const idToken = req.headers.authorization.split("bearer ")[1]
+    }
+  next();
+}
+
 async function run() {
     try {
       await client.connect();
