@@ -72,6 +72,7 @@ async function run() {
         const cursor = orderCollection.find(query);
         const orders = await cursor.toArray();
         res.json(orders);
+        console.log("order hitted");
 
     })
       
