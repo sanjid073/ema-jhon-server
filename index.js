@@ -68,9 +68,10 @@ async function run() {
         const email = req.query.email;
         if(email){
             query = {email:email}
-            const cursor = orderCollection.find(query);
-            const orders = await cursor.toArray();
+
         }
+        const cursor = orderCollection.find(query);
+        const orders = await cursor.toArray();
 
         res.json(orders);
         console.log("order hitted");
